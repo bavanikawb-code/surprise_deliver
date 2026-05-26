@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact - WebBuilders Surprise Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/94741561234" class="float-whatsapp" title="WhatsApp Us" aria-label="WhatsApp Us"></a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+ <div class="nav-logo">
+ <img src="logo.png" alt="Logo" onerror="this.style.display='none'" />
+ <div class="nav-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span>
+ <span class="sub">Surprise Delivery</span>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a href="index.html">Home</a>
+ <a href="about.html">About</a>
+ <a href="services.html">Services</a>
+ <a href="gallery.html">Gallery</a>
+ <a href="contact.html" class="nav-cta active">Call Us</a>
+ </div>
+ <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+ <a href="index.html" onclick="closeMobile()"> Home</a>
+ <a href="about.html" onclick="closeMobile()"> About</a>
+ <a href="services.html" onclick="closeMobile()"> Services</a>
+ <a href="gallery.html" onclick="closeMobile()"> Gallery</a>
+ <a href="contact.html" class="active" onclick="closeMobile()">Contact</a>
+</div>
+<main class="page-main">
+<!-- CONTACT -->
+<section id="contact">
+ <div class="contact-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Get In Touch</div>
+ <h2 class="section-title">Contact <span>Us</span></h2>
+ <p class="section-sub">We're just a call away! Reach us anytime to plan your perfect surprise delivery.</p>
+ </div>
+ <div class="contact-grid">
+ <div class="contact-info-cards reveal-left">
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-green">P</div>
+ <div>
+ <div class="cc-label">Phone / Call Us</div>
+ <a href="tel:0741561234" class="cc-val">074 156 1234</a>
+ </div>
+ </div>
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-blue">E</div>
+ <div>
+ <div class="cc-label">Email Address</div>
+ <a href="mailto:info@webbuilders.lk" class="cc-val">info@webbuilders.lk</a>
+ </div>
+ </div>
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-orange">M</div>
+ <div>
+ <div class="cc-label">Our Location</div>
+ <div class="cc-val">No 953, Thadatheru Junction<br>KKS Road, Jaffna</div>
+ </div>
+ </div>
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-purple">H</div>
+ <div>
+ <div class="cc-label">Working Hours</div>
+ <div class="cc-val">Mon-Sat: 8 AM - 9 PM<br>Sun: 9 AM - 6 PM</div>
+ </div>
+ </div>
+ <!-- Map embed -->
+ <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,143,255,0.15);margin-top:0.5rem;">
+ <iframe
+ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.5!2d80.0177!3d9.6631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMzknNDcuMiJOIDgwwrAwMScwMy43IkU!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk"
+ width="100%" height="180" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
+ </div>
+ </div>
+ <div class="contact-cta-box reveal-right">
+ <div class="contact-cta-img">
+ <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=700&h=280&fit=crop&crop=center" alt="Order Now" loading="lazy" />
+ </div>
+ <div class="contact-cta-body">
+ <h3>Order Your Surprise Now!</h3>
+ <p>Don't wait - the best surprises are just one call away. Our friendly team is ready to help you create an unforgettable moment.</p>
+ <a href="tel:0741561234" class="call-btn-big">Call: 074 156 1234</a>
+ <a href="https://wa.me/94741561234" class="whatsapp-btn" target="_blank">WhatsApp Us</a>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer>
+ <div class="footer-logo">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=72&h=72&fit=crop&crop=center" alt="Logo" onerror="this.style.display='none'" />
+ <div class="footer-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span><span style="color:var(--muted);font-size:0.8rem">.lk</span>
+ </div>
+ </div>
+ <div class="footer-text">
+ Copyright 2026 <span>WebBuilders Surprise Delivery</span>. All rights reserved.<br>
+ <span style="color:var(--muted)">Made with love in Jaffna, Sri Lanka</span>
+ </div>
+ <div style="font-size:0.8rem;color:var(--muted)">
+ <a href="tel:0741561234" style="color:var(--blue-light)">074 156 1234</a>
+ </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+
+

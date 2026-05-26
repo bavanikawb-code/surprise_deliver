@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery - WebBuilders Surprise Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/94741561234" class="float-whatsapp" title="WhatsApp Us" aria-label="WhatsApp Us"></a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+ <div class="nav-logo">
+ <img src="logo.png" alt="Logo" onerror="this.style.display='none'" />
+ <div class="nav-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span>
+ <span class="sub">Surprise Delivery</span>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a href="index.html">Home</a>
+ <a href="about.html">About</a>
+ <a href="services.html">Services</a>
+ <a href="gallery.html" class="active">Gallery</a>
+ <a href="contact.html" class="nav-cta">Call Us</a>
+ </div>
+ <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+ <a href="index.html" onclick="closeMobile()"> Home</a>
+ <a href="about.html" onclick="closeMobile()"> About</a>
+ <a href="services.html" onclick="closeMobile()"> Services</a>
+ <a href="gallery.html" class="active" onclick="closeMobile()"> Gallery</a>
+ <a href="contact.html" onclick="closeMobile()">Contact</a>
+</div>
+<main class="page-main">
+<!-- GALLERY -->
+<section id="gallery">
+ <div class="gallery-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Our Work</div>
+ <h2 class="section-title">Moments We've <span>Created</span></h2>
+ <p class="section-sub">A glimpse into the joy and magic we've delivered real surprises, real smiles, real memories.</p>
+ </div>
+ <div class="gallery-grid reveal">
+ <div class="gallery-item">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtF6XiGRT8BZTmbUzge04HV5udrsMHqqopQTau4ZhBOeF7YGl4TEoeVlBolu7KJWDPLNLJE-Poq9rWFsyPMWOEAyZgaEklfnprnGXfYitTwmEWG-zk3QCOtkeyeItb6Rw688i9vDFG95qXFooPkVR6eZRgfV0cE5SeihMgv14S2sBEchluyG3UQJemhIcwqlmFrJmFV-RJUFNcFUDkxj-L68Z5sHe0CQ-MvAxYciUmkU7aH7oWkfDeXwx5w7A0zL2Ue6nLojeOCQ-0" alt="Surprise Bundles" loading="lazy" />
+ <div class="gallery-overlay"><h4>Mega Surprise Bundles</h4><span>Gift Collections</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxZ7XU83q1ULT_erEhK1bunHwaGIuDKwGWhn6S5oKjQZ_yqqyNf842W1iNCRqHxyWplny4So5YkARdCkar_LtBhaVyCL58NuEV5WA1BgjGqxC0vo4TPqgctkq1ar_S6Rxf5aJaMJXt3P2sI2v8mRDT7oVU4DfK7Uc5riB1Z6yTc6gj5-zkIzGW1huNvCGM2_LUop41fIhZAlILXRfe2ofk2jxnSSrkj9yttSKJc3In3tKYdNh9mHxVQgFZELEQqbQqzmFvDgp6MVqr" alt="Birthday Cake" loading="lazy" />
+ <div class="gallery-overlay"><h4>Birthday Cake Delivery</h4><span>Sweet Celebrations</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4lT20XW-7pTXj6PLIM4gL08BiktBG1CTVmVRlMl12lZn5fArih31l1BXn6nInFcQmYwsBWWRu4uA1sfVFOBWPJ29IGy2x0AwoOUZRFDZecTrd4NCqHfs6XF_wIC8sgGomBH8yOxIcr7PwbI2DgwtvvY2noju2-WkSGvjDNtR_YEdNem1KqN6GtWYJQ2EVNjDYO0x8unIXpdZySwDihKCeXZF-2keae1w9n1k4Vun95C-3A4CZdM56zjiXKhjdR8P3Wmuyr_xrExAk" alt="Flowers" loading="lazy" />
+ <div class="gallery-overlay"><h4>Flower Arrangements</h4><span>Fresh & Beautiful</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="img5.jpg" alt="Balloon Decorations" loading="lazy" />
+ <div class="gallery-overlay"><h4>Balloon Decorations</h4><span>Party Ready</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4lT20XW-7pTXj6PLIM4gL08BiktBG1CTVmVRlMl12lZn5fArih31l1BXn6nInFcQmYwsBWWRu4uA1sfVFOBWPJ29IGy2x0AwoOUZRFDZecTrd4NCqHfs6XF_wIC8sgGomBH8yOxIcr7PwbI2DgwtvvY2noju2-WkSGvjDNtR_YEdNem1KqN6GtWYJQ2EVNjDYO0x8unIXpdZySwDihKCeXZF-2keae1w9n1k4Vun95C-3A4CZdM56zjiXKhjdR8P3Wmuyr_xrExAk" alt="Romantic" loading="lazy" />
+ <div class="gallery-overlay"><h4>Romantic Packages</h4><span>Anniversary Love</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtF6XiGRT8BZTmbUzge04HV5udrsMHqqopQTau4ZhBOeF7YGl4TEoeVlBolu7KJWDPLNLJE-Poq9rWFsyPMWOEAyZgaEklfnprnGXfYitTwmEWG-zk3QCOtkeyeItb6Rw688i9vDFG95qXFooPkVR6eZRgfV0cE5SeihMgv14S2sBEchluyG3UQJemhIcwqlmFrJmFV-RJUFNcFUDkxj-L68Z5sHe0CQ-MvAxYciUmkU7aH7oWkfDeXwx5w7A0zL2Ue6nLojeOCQ-0" alt="Express" loading="lazy" />
+ <div class="gallery-overlay"><h4>Express Delivery</h4><span>Lightning Fast</span></div>
+ </div>
+ </div>
+ </div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer>
+ <div class="footer-logo">
+ <img src="logo.png" alt="Logo" onerror="this.style.display='none'" />
+ <div class="footer-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span><span style="color:var(--muted);font-size:0.8rem">.lk</span>
+ </div>
+ </div>
+ <div class="footer-text">
+ Copyright 2026 <span>WebBuilders Surprise Delivery</span>. All rights reserved.<br>
+ <span style="color:var(--muted)">Made with love in Jaffna, Sri Lanka</span>
+ </div>
+ <div style="font-size:0.8rem;color:var(--muted)">
+ <a href="tel:0741561234" style="color:var(--blue-light)">074 156 1234</a>
+ </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+
+

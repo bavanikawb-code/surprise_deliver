@@ -1,0 +1,689 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WebBuilders Surprise Delivery </title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+ :root {
+ --black: #050810;
+ --dark: #0b0f1a;
+ --card: #111828;
+ --blue: #1a8fff;
+ --blue-light: #4db3ff;
+ --orange: #ff8c00;
+ --orange-light: #ffb347;
+ --gold: #ffd700;
+ --white: #f0f4ff;
+ --muted: #7a8aaa;
+ --radius: 18px;
+ --font-heading: 'Baloo 2', cursive;
+ --font-body: 'Nunito', sans-serif;
+ }
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; }
+ body { background: var(--black); color: var(--white); font-family: var(--font-body); overflow-x: hidden; }
+ a { text-decoration: none; color: inherit; }
+ img { max-width: 100%; display: block; }
+ ::-webkit-scrollbar { width: 6px; }
+ ::-webkit-scrollbar-track { background: var(--black); }
+ ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+ /* NAVBAR */
+ nav {
+ position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+ padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+ height: 70px; background: rgba(5,8,16,0.88); backdrop-filter: blur(20px);
+ border-bottom: 1px solid rgba(26,143,255,0.15); transition: all 0.4s;
+ }
+ nav.scrolled { height: 60px; background: rgba(5,8,16,0.97); box-shadow: 0 4px 30px rgba(26,143,255,0.15); }
+ .nav-logo { display: flex; align-items: center; gap: 10px; }
+ .nav-logo img { height: 42px; border-radius: 10px; }
+ .nav-logo-text { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; line-height: 1.1; }
+ .nav-logo-text .blue { color: var(--blue-light); }
+ .nav-logo-text .orange { color: var(--orange-light); }
+ .nav-logo-text .sub { display: block; font-size: 0.65rem; color: var(--muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+ .nav-links { display: flex; gap: 2rem; align-items: center; }
+ .nav-links a { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.5px; color: var(--muted); transition: color 0.3s; position: relative; padding-bottom: 2px; text-transform: uppercase; }
+ .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg,var(--blue),var(--orange)); transition: width 0.3s; }
+ .nav-links a:hover { color: var(--white); }
+ .nav-links a:hover::after { width: 100%; }
+ .nav-cta { background: linear-gradient(135deg,var(--blue),#0066cc) !important; color: #fff !important; padding: 8px 20px; border-radius: 30px; font-weight: 800 !important; box-shadow: 0 4px 15px rgba(26,143,255,0.35); transition: transform 0.2s, box-shadow 0.2s !important; }
+ .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26,143,255,0.5) !important; }
+ .nav-cta::after { display: none !important; }
+ .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+ .hamburger span { display: block; width: 26px; height: 3px; background: var(--blue); border-radius: 3px; transition: all 0.3s; }
+ .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,6px); }
+ .hamburger.open span:nth-child(2) { opacity: 0; }
+ .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-6px); }
+ .mobile-menu { display: none; position: fixed; top: 70px; left: 0; width: 100%; background: rgba(5,8,16,0.98); backdrop-filter: blur(20px); padding: 1.5rem 5%; flex-direction: column; gap: 0; z-index: 999; border-bottom: 1px solid rgba(26,143,255,0.2); }
+ .mobile-menu.open { display: flex; }
+ .mobile-menu a { font-size: 1rem; font-weight: 700; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07); color: var(--muted); transition: color 0.2s; text-transform: uppercase; letter-spacing: 0.5px; }
+ .mobile-menu a:hover { color: var(--blue-light); }
+
+ /* HERO */
+ #home {
+ position: relative; min-height: 100vh;
+ display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+ padding: 100px 5% 60px; gap: 3rem; overflow: hidden;
+ }
+ .hero-bg {
+ position: absolute; inset: 0;
+ background: radial-gradient(ellipse at 70% 50%, rgba(26,143,255,0.07) 0%, transparent 60%),
+ radial-gradient(ellipse at 20% 80%, rgba(255,140,0,0.06) 0%, transparent 50%);
+ pointer-events: none;
+ }
+ .hero-text { position: relative; z-index: 1; animation: fadeInUp 0.9s both; }
+ .hero-badge {
+ display: inline-flex; align-items: center; gap: 8px;
+ background: rgba(26,143,255,0.12); border: 1px solid rgba(26,143,255,0.3);
+ padding: 6px 16px; border-radius: 30px; font-size: 0.78rem; font-weight: 700;
+ color: var(--blue-light); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.4rem;
+ }
+ .hero-badge .dot { width: 7px; height: 7px; background: var(--blue); border-radius: 50%; animation: blink 1.5s infinite; }
+ .hero-title { font-family: var(--font-heading); font-size: clamp(2.2rem,5vw,3.8rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.2rem; }
+ .hero-title .grad { background: linear-gradient(90deg,var(--blue-light),var(--orange-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+ .hero-sub { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 480px; margin-bottom: 2.2rem; }
+ .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+ .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg,var(--orange),#e05c00); color: #fff; font-family: var(--font-body); font-size: 0.95rem; font-weight: 800; padding: 13px 28px; border-radius: 50px; border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(255,140,0,0.35); transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+ .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255,140,0,0.5); }
+ .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: rgba(26,143,255,0.1); border: 1.5px solid rgba(26,143,255,0.35); color: var(--blue-light); font-family: var(--font-body); font-size: 0.95rem; font-weight: 800; padding: 13px 28px; border-radius: 50px; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+ .btn-secondary:hover { background: rgba(26,143,255,0.2); transform: translateY(-3px); }
+ .hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+ .stat-num { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 800; background: linear-gradient(135deg,var(--blue-light),var(--orange-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+ .stat-label { font-size: 0.74rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+ /* HERO IMAGE SIDE */
+ .hero-image-side { position: relative; z-index: 1; animation: fadeInRight 1s 0.3s both; }
+ .hero-main-img {
+ width: 100%; max-width: 520px; border-radius: 24px; overflow: hidden;
+ box-shadow: 0 30px 80px rgba(26,143,255,0.2), 0 0 0 1px rgba(26,143,255,0.1);
+ position: relative; aspect-ratio: 4/3;
+ }
+ .hero-main-img img { width: 100%; height: 100%; object-fit: cover; }
+ .hero-main-img::before {
+ content: ''; position: absolute; inset: 0; z-index: 1;
+ background: linear-gradient(135deg, rgba(26,143,255,0.1), rgba(255,140,0,0.05));
+ pointer-events: none;
+ }
+ .hero-float-card {
+ position: absolute; bottom: -20px; left: -20px;
+ background: var(--card); border: 1px solid rgba(26,143,255,0.2); border-radius: 16px;
+ padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+ box-shadow: 0 15px 40px rgba(0,0,0,0.4); animation: float-card 3s ease-in-out infinite;
+ z-index: 2; backdrop-filter: blur(10px);
+ }
+ .hero-float-card .fc-icon { width: 42px; height: 42px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+ .hero-float-card .fc-icon img { width: 100%; height: 100%; object-fit: cover; }
+ .hero-float-card .fc-text .t1 { font-size: 0.8rem; font-weight: 800; color: var(--white); }
+ .hero-float-card .fc-text .t2 { font-size: 0.7rem; color: var(--orange-light); font-weight: 700; }
+ .hero-float-card2 {
+ position: absolute; top: -18px; right: -18px;
+ background: linear-gradient(135deg,rgba(26,143,255,0.2),rgba(26,143,255,0.08));
+ border: 1px solid rgba(26,143,255,0.25); border-radius: 14px;
+ padding: 12px 16px; text-align: center;
+ box-shadow: 0 10px 30px rgba(26,143,255,0.2); animation: float-card2 4s ease-in-out infinite;
+ z-index: 2; backdrop-filter: blur(10px);
+ }
+ .hero-float-card2 .big { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; color: var(--blue-light); }
+ .hero-float-card2 .sm { font-size: 0.65rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+ /* ABOUT */
+ #about { background: var(--dark); padding: 90px 5%; }
+ .about-wrap { max-width: 1100px; margin: 0 auto; }
+ .section-label { display: inline-block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--orange-light); margin-bottom: 0.5rem; }
+ .section-title { font-family: var(--font-heading); font-size: clamp(1.8rem,4vw,2.7rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem; }
+ .section-title span { background: linear-gradient(90deg,var(--blue-light),var(--orange-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+ .section-sub { color: var(--muted); font-size: 0.98rem; line-height: 1.7; max-width: 560px; }
+ .section-center { text-align: center; margin-bottom: 3.5rem; }
+ .section-center .section-sub { margin: 0 auto; }
+ .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+ .about-img-stack { position: relative; }
+ .about-main-img { width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.4); aspect-ratio: 4/3; }
+ .about-main-img img { width: 100%; height: 100%; object-fit: cover; }
+ .about-small-img { position: absolute; bottom: -24px; right: -24px; width: 45%; border-radius: 14px; overflow: hidden; border: 3px solid var(--dark); box-shadow: 0 15px 40px rgba(0,0,0,0.5); aspect-ratio: 1; }
+ .about-small-img img { width: 100%; height: 100%; object-fit: cover; }
+ .about-badge { position: absolute; top: -16px; left: -16px; background: linear-gradient(135deg,var(--orange),#c04400); width: 80px; height: 80px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(255,140,0,0.4); animation: spin-slow 10s linear infinite; }
+ .about-badge .ab-num { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; color: #fff; line-height: 1; }
+ .about-badge .ab-txt { font-size: 0.55rem; color: rgba(255,255,255,0.85); font-weight: 700; text-transform: uppercase; text-align: center; }
+ .about-text { }
+ .feature-list { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.9rem; }
+ .feature-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 0.93rem; color: rgba(240,244,255,0.85); }
+ .feature-list li .check { width: 22px; height: 22px; background: linear-gradient(135deg,var(--blue),#0055bb); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; box-shadow: 0 3px 10px rgba(26,143,255,0.3); }
+
+ /* SERVICES */
+ #services { background: var(--black); padding: 90px 5%; }
+ .services-wrap { max-width: 1100px; margin: 0 auto; }
+ .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+ .service-card { background: var(--card); border: 1px solid rgba(26,143,255,0.1); border-radius: var(--radius); overflow: hidden; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s, border-color 0.35s; }
+ .service-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(26,143,255,0.15); border-color: rgba(26,143,255,0.3); }
+ .service-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; }
+ .service-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+ .service-card:hover .service-img img { transform: scale(1.07); }
+ .service-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(11,15,26,0.8) 0%, transparent 60%); }
+ .service-body { padding: 1.4rem; }
+ .service-tag { display: inline-block; background: rgba(26,143,255,0.12); border: 1px solid rgba(26,143,255,0.2); color: var(--blue-light); font-size: 0.68rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.7rem; }
+ .service-card:nth-child(2) .service-tag { background: rgba(255,140,0,0.1); border-color: rgba(255,140,0,0.2); color: var(--orange-light); }
+ .service-card:nth-child(3) .service-tag { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.2); color: var(--gold); }
+ .service-card:nth-child(4) .service-tag { background: rgba(130,80,255,0.1); border-color: rgba(130,80,255,0.2); color: #b388ff; }
+ .service-card:nth-child(5) .service-tag { background: rgba(40,167,69,0.1); border-color: rgba(40,167,69,0.2); color: #6fcf97; }
+ .service-card:nth-child(6) .service-tag { background: rgba(255,215,0,0.1); border-color: rgba(255,215,0,0.2); color: var(--gold); }
+ .service-body h3 { font-family: var(--font-heading); font-size: 1.05rem; font-weight: 800; margin-bottom: 0.45rem; color: var(--white); }
+ .service-body p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+ /* GALLERY */
+ #gallery { background: var(--dark); padding: 90px 5%; }
+ .gallery-wrap { max-width: 1100px; margin: 0 auto; }
+ .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 220px; gap: 1rem; margin-top: 3.5rem; }
+ .gallery-item { border-radius: 14px; overflow: hidden; position: relative; cursor: pointer; }
+ .gallery-item:nth-child(1) { grid-column: span 2; }
+ .gallery-item:nth-child(4) { grid-column: span 2; }
+ .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; display: block; }
+ .gallery-item:hover img { transform: scale(1.07); }
+ .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,8,16,0.8) 0%, rgba(5,8,16,0.1) 60%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; opacity: 0; transition: opacity 0.3s; }
+ .gallery-item:hover .gallery-overlay { opacity: 1; }
+ .gallery-overlay h4 { font-family: var(--font-heading); font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 0.2rem; }
+ .gallery-overlay span { font-size: 0.72rem; color: var(--blue-light); font-weight: 700; }
+
+ /* WHY US */
+ #why { background: var(--black); padding: 90px 5%; }
+ .why-wrap { max-width: 1100px; margin: 0 auto; }
+ .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+ .why-card { background: var(--card); border: 1px solid rgba(26,143,255,0.1); border-radius: var(--radius); overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+ .why-card:hover { transform: translateY(-6px); border-color: rgba(26,143,255,0.3); }
+ .why-card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; }
+ .why-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+ .why-card:hover .why-card-img img { transform: scale(1.06); }
+ .why-card-body { padding: 1.3rem; }
+ .why-card-body h4 { font-family: var(--font-heading); font-size: 1rem; font-weight: 800; margin-bottom: 0.4rem; color: var(--white); }
+ .why-card-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+ /* CTA BAND */
+ .cta-band {
+ position: relative; z-index: 1;
+ background: linear-gradient(135deg, rgba(26,143,255,0.15), rgba(255,140,0,0.1));
+ border-top: 1px solid rgba(26,143,255,0.2); border-bottom: 1px solid rgba(255,140,0,0.15);
+ padding: 70px 5%; text-align: center; overflow: hidden;
+ }
+ .cta-band-bg { position: absolute; inset: 0; z-index: 0; }
+ .cta-band-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.08; }
+ .cta-band-content { position: relative; z-index: 1; }
+ .cta-band h2 { font-family: var(--font-heading); font-size: clamp(1.6rem,3.5vw,2.5rem); font-weight: 800; margin-bottom: 0.8rem; }
+ .cta-band p { color: var(--muted); max-width: 500px; margin: 0 auto 2rem; font-size: 0.98rem; line-height: 1.7; }
+ .call-btn { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg,#28a745,#1d7a32); color: #fff; font-family: var(--font-body); font-size: 1.1rem; font-weight: 800; padding: 16px 40px; border-radius: 50px; text-decoration: none; box-shadow: 0 10px 35px rgba(40,167,69,0.35); transition: transform 0.2s, box-shadow 0.2s; animation: ring 3s 2s infinite; }
+ .call-btn:hover { transform: translateY(-4px); box-shadow: 0 16px 45px rgba(40,167,69,0.5); }
+
+ /* CONTACT */
+ #contact { background: var(--dark); padding: 90px 5%; }
+ .contact-wrap { max-width: 1000px; margin: 0 auto; }
+ .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3.5rem; align-items: start; }
+ .contact-info-cards { display: flex; flex-direction: column; gap: 1rem; }
+ .contact-card { background: var(--card); border: 1px solid rgba(26,143,255,0.12); border-radius: 14px; padding: 1.3rem 1.5rem; display: flex; align-items: flex-start; gap: 1rem; transition: transform 0.3s, border-color 0.3s; }
+ .contact-card:hover { transform: translateX(6px); border-color: rgba(26,143,255,0.3); }
+ .cc-icon-img { width: 44px; height: 44px; border-radius: 12px; overflow: hidden; flex-shrink: 0; }
+ .cc-icon-img img { width: 100%; height: 100%; object-fit: cover; }
+ .cc-icon-fallback { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+ .cc-blue { background: rgba(26,143,255,0.15); }
+ .cc-green { background: rgba(40,167,69,0.15); }
+ .cc-orange { background: rgba(255,140,0,0.15); }
+ .cc-purple { background: rgba(130,80,255,0.15); }
+ .cc-label { font-size: 0.7rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+ .cc-val { font-size: 0.9rem; font-weight: 700; color: var(--white); }
+ a.cc-val { color: var(--blue-light); transition: color 0.2s; }
+ a.cc-val:hover { color: #fff; }
+ .contact-cta-box { background: var(--card); border: 1px solid rgba(26,143,255,0.15); border-radius: var(--radius); overflow: hidden; }
+ .contact-cta-img { width: 100%; aspect-ratio: 16/7; overflow: hidden; }
+ .contact-cta-img img { width: 100%; height: 100%; object-fit: cover; }
+ .contact-cta-body { padding: 2rem; text-align: center; position: relative; }
+ .contact-cta-body::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg,var(--blue),var(--orange)); }
+ .contact-cta-body h3 { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800; margin-bottom: 0.6rem; }
+ .contact-cta-body p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.8rem; }
+ .call-btn-big { display: flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg,#28a745,#1d7a32); color: #fff; font-family: var(--font-body); font-size: 1rem; font-weight: 800; padding: 14px 30px; border-radius: 50px; text-decoration: none; box-shadow: 0 8px 30px rgba(40,167,69,0.35); transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 0.9rem; animation: ring 3s 3s infinite; }
+ .call-btn-big:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(40,167,69,0.5); }
+ .whatsapp-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(37,211,102,0.1); border: 1.5px solid rgba(37,211,102,0.3); color: #25d366; font-family: var(--font-body); font-size: 0.95rem; font-weight: 800; padding: 12px 28px; border-radius: 50px; text-decoration: none; transition: all 0.2s; }
+ .whatsapp-btn:hover { background: rgba(37,211,102,0.2); transform: translateY(-2px); }
+
+ /* FOOTER */
+ footer { position: relative; z-index: 1; background: var(--black); border-top: 1px solid rgba(26,143,255,0.1); padding: 2.5rem 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+ .footer-logo { display: flex; align-items: center; gap: 10px; }
+ .footer-logo img { height: 36px; border-radius: 8px; }
+ .footer-logo-text { font-family: var(--font-heading); font-size: 1rem; font-weight: 800; }
+ .footer-logo-text .blue { color: var(--blue-light); }
+ .footer-logo-text .orange { color: var(--orange-light); }
+ .footer-text { font-size: 0.78rem; color: var(--muted); text-align: center; }
+ .footer-text span { color: var(--orange-light); }
+
+ /* FLOATING WHATSAPP */
+ .float-whatsapp { position: fixed; bottom: 28px; right: 28px; z-index: 9999; width: 58px; height: 58px; border-radius: 50%; background: linear-gradient(135deg,#25d366,#128c4a); display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 8px 30px rgba(37,211,102,0.5); animation: float-btn 3s ease-in-out infinite; }
+ .float-whatsapp::before { content: ''; position: absolute; inset: 0; border-radius: 50%; background: rgba(37,211,102,0.4); animation: ripple-call 2s infinite; }
+ .float-whatsapp::after { content: ''; position: relative; z-index: 1; width: 31px; height: 31px; background: center / contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='white' d='M19.11 17.2c-.29-.14-1.7-.84-1.96-.94-.26-.1-.45-.14-.64.14-.19.29-.74.94-.91 1.13-.17.19-.34.21-.63.07-.29-.14-1.22-.45-2.33-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.59.13-.13.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1 1-1 2.43s1.03 2.81 1.18 3.01c.14.19 2.03 3.1 4.92 4.35.69.3 1.22.48 1.64.61.69.22 1.32.19 1.82.12.56-.08 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.19-.55-.34zM16.03 4C9.42 4 4.05 9.37 4.05 15.98c0 2.11.55 4.17 1.6 5.98L4 28l6.19-1.62a11.9 11.9 0 0 0 5.84 1.49h.01c6.61 0 11.98-5.37 11.98-11.98S22.64 4 16.03 4zm0 21.84h-.01c-1.84 0-3.65-.49-5.23-1.42l-.38-.22-3.67.96.98-3.58-.25-.37a9.89 9.89 0 0 1-1.51-5.23c0-5.54 4.51-10.05 10.06-10.05 2.69 0 5.22 1.05 7.12 2.95a10 10 0 0 1 2.94 7.11c0 5.54-4.51 10.05-10.05 10.05z'/%3E%3C/svg%3E"); }
+
+ /* REVEAL */
+ .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+ .reveal.visible { opacity: 1; transform: translateY(0); }
+ .reveal-left { opacity: 0; transform: translateX(-30px); transition: opacity 0.7s, transform 0.7s; }
+ .reveal-left.visible { opacity: 1; transform: translateX(0); }
+ .reveal-right { opacity: 0; transform: translateX(30px); transition: opacity 0.7s, transform 0.7s; }
+ .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+ /* ANIMATIONS */
+ @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+ @keyframes fadeInRight { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+ @keyframes blink { 0%,100%{ opacity:1; } 50%{ opacity:0.3; } }
+ @keyframes float-card { 0%,100%{ transform:translateY(0) rotate(-1deg); } 50%{ transform:translateY(-8px) rotate(0deg); } }
+ @keyframes float-card2 { 0%,100%{ transform:translateY(0) rotate(1deg); } 50%{ transform:translateY(-10px) rotate(-1deg); } }
+ @keyframes spin-slow { from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+ @keyframes ring { 0%,10%,100%{ transform:rotate(0deg); } 2%,8%{ transform:rotate(-10deg); } 4%,6%{ transform:rotate(10deg); } }
+ @keyframes float-btn { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+ @keyframes ripple-call { 0%{ transform:scale(1); opacity:0.6; } 100%{ transform:scale(1.8); opacity:0; } }
+
+ /* RESPONSIVE */
+ @media (max-width:960px) {
+ #home { grid-template-columns: 1fr; padding-top: 90px; text-align: center; }
+ .hero-text { order: 1; }
+ .hero-image-side { order: 0; max-width: 480px; margin: 0 auto; }
+ .hero-btns { justify-content: center; }
+ .hero-stats { justify-content: center; }
+ .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+ .contact-grid { grid-template-columns: 1fr; }
+ .services-grid { grid-template-columns: 1fr 1fr; }
+ .why-grid { grid-template-columns: 1fr 1fr; }
+ }
+ @media (max-width:680px) {
+ nav .nav-links { display: none; }
+ .hamburger { display: flex; }
+ .services-grid { grid-template-columns: 1fr; }
+ .gallery-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 160px; }
+ .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 2; }
+ .why-grid { grid-template-columns: 1fr; }
+ footer { flex-direction: column; align-items: center; text-align: center; }
+ .float-whatsapp { bottom: 18px; right: 18px; width: 52px; height: 52px; }
+ .float-whatsapp::after { width: 28px; height: 28px; }
+ .hero-float-card, .hero-float-card2 { display: none; }
+ }
+ @media (max-width:460px) {
+ .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+ .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; }
+ }
+</style>
+</head>
+<body>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/94741561234" class="float-whatsapp" title="WhatsApp Us" aria-label="WhatsApp Us"></a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+ <div class="nav-logo">
+ <img src="logo" alt="Logo" onerror="this.style.display='none'" />
+ <div class="nav-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span>
+ <span class="sub">Surprise Delivery</span>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a href="#home">Home</a>
+ <a href="#about">About</a>
+ <a href="#services">Services</a>
+ <a href="#gallery">Gallery</a>
+ <a href="#contact" class="nav-cta"> Call Us</a>
+ </div>
+ <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+ <a href="#home" onclick="closeMobile()"> Home</a>
+ <a href="#about" onclick="closeMobile()"> About</a>
+ <a href="#services" onclick="closeMobile()"> Services</a>
+ <a href="#gallery" onclick="closeMobile()"> Gallery</a>
+ <a href="#contact" onclick="closeMobile()"> Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+ <div class="hero-bg"></div>
+ <div class="hero-text">
+ <div class="hero-badge"><span class="dot"></span> Now Delivering Happiness</div>
+ <h1 class="hero-title">
+ Surprise Delivery<br>
+ <span class="grad">Redefined! </span>
+ </h1>
+ <p class="hero-sub">We deliver more than gifts - we deliver unforgettable moments. Surprise packages crafted with love, delivered with speed across Jaffna and beyond.</p>
+ <div class="hero-btns">
+ <a href="tel:0741561234" class="btn-primary"> Call to Order</a>
+ <a href="#services" class="btn-secondary"> Our Services</a>
+ </div>
+ <div class="hero-stats">
+ <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Happy Deliveries</div></div>
+ <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Available</div></div>
+ <div class="stat"><div class="stat-num"> 4.9</div><div class="stat-label">Customer Rating</div></div>
+ </div>
+ </div>
+ <div class="hero-image-side">
+ <div class="hero-main-img">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=900&h=700&fit=crop&crop=center" alt="Surprise Gift Delivery" loading="eager" />
+ </div>
+ <div class="hero-float-card">
+ <div class="fc-icon">
+ <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=80&h=80&fit=crop" alt="Delivery" />
+ </div>
+ <div class="fc-text">
+ <div class="t1">Just Delivered! </div>
+ <div class="t2">Express - 30 min ago</div>
+ </div>
+ </div>
+ <div class="hero-float-card2">
+ <div class="big">4.9</div>
+ <div class="sm">Customer<br>Rating</div>
+ </div>
+ </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+ <div class="about-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Who We Are</div>
+ <h2 class="section-title">More Than a Delivery -<br><span>It's a Surprise!</span></h2>
+ <p class="section-sub">WebBuilders Surprise Delivery was born from one simple idea: every occasion deserves something extraordinary. We handcraft surprise packages with love, speed, and magic.</p>
+ </div>
+ <div class="about-grid">
+ <div class="about-img-stack reveal-left">
+ <div class="about-main-img">
+ <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&h=600&fit=crop&crop=center" alt="Gift wrapping" loading="lazy" />
+ </div>
+ <div class="about-small-img">
+ <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=400&fit=crop&crop=center" alt="Surprise gift" loading="lazy" />
+ </div>
+ <div class="about-badge">
+ <span class="ab-num">5</span>
+ <span class="ab-txt">Star<br>Rated</span>
+ </div>
+ </div>
+ <div class="about-text reveal-right">
+ <div class="section-label">Our Story</div>
+ <h3 class="section-title" style="font-size:clamp(1.4rem,3vw,2rem)">Delivering Smiles <span>Across Jaffna</span></h3>
+ <p style="color:var(--muted);line-height:1.75;margin-bottom:1rem;font-size:0.95rem;">Based at Thadatheru Junction, KKS Road, Jaffna, we've been making people smile with every delivery. Our team knows that the best gifts aren't just things - they're experiences wrapped in excitement.</p>
+ <ul class="feature-list">
+ <li><div class="check"></div><span>Handpicked surprise items curated with care and creativity</span></li>
+ <li><div class="check"></div><span>Same-day & express delivery options available</span></li>
+ <li><div class="check"></div><span>Customizable packages for every occasion & budget</span></li>
+ <li><div class="check"></div><span>Trusted by 500+ happy customers across Jaffna</span></li>
+ <li><div class="check"></div><span>Fully discreet packaging - the surprise stays a secret!</span></li>
+ </ul>
+ <div style="margin-top:1.8rem;">
+ <a href="tel:0741561234" class="btn-primary"> Order Now</a>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+ <div class="services-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">What We Offer</div>
+ <h2 class="section-title">Our <span>Surprise Services</span></h2>
+ <p class="section-sub">From birthday surprises to anniversary specials - we have the perfect delivery for every celebration.</p>
+ </div>
+ <div class="services-grid">
+ <div class="service-card reveal">
+ <div class="service-img">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600&h=340&fit=crop&crop=center" alt="Gift Boxes" loading="lazy" />
+ <div class="service-img-overlay"></div>
+ </div>
+ <div class="service-body">
+ <div class="service-tag">Most Popular</div>
+ <h3>Surprise Gift Boxes</h3>
+ <p>Beautifully curated gift boxes filled with handpicked surprises tailored to your loved one's personality and occasion.</p>
+ </div>
+ </div>
+ <div class="service-card reveal">
+ <div class="service-img">
+ <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=340&fit=crop&crop=center" alt="Birthday Delivery" loading="lazy" />
+ <div class="service-img-overlay"></div>
+ </div>
+ <div class="service-body">
+ <div class="service-tag">Birthday </div>
+ <h3>Birthday Specials</h3>
+ <p>Make their birthday unforgettable with cakes, balloons, gifts, and personal messages all in one magical delivery.</p>
+ </div>
+ </div>
+ <div class="service-card reveal">
+ <div class="service-img">
+ <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=600&h=340&fit=crop&crop=center" alt="Flowers" loading="lazy" />
+ <div class="service-img-overlay"></div>
+ </div>
+ <div class="service-body">
+ <div class="service-tag">Flowers </div>
+ <h3>Flower & Balloon Combos</h3>
+ <p>Fresh flower arrangements paired with stunning balloon decorations. Perfect for any celebration, delivered with a smile.</p>
+ </div>
+ </div>
+ <div class="service-card reveal">
+ <div class="service-img">
+ <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=600&h=340&fit=crop&crop=center" alt="Anniversary" loading="lazy" />
+ <div class="service-img-overlay"></div>
+ </div>
+ <div class="service-body">
+ <div class="service-tag">Romance </div>
+ <h3>Anniversary Packages</h3>
+ <p>Celebrate love with our romantic anniversary bundles. Flowers, chocolates, personalized items and heartfelt surprises.</p>
+ </div>
+ </div>
+ <div class="service-card reveal">
+ <div class="service-img">
+ <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=340&fit=crop&crop=center" alt="Express Delivery" loading="lazy" />
+ <div class="service-img-overlay"></div>
+ </div>
+ <div class="service-body">
+ <div class="service-tag"> Express</div>
+ <h3>Express Delivery</h3>
+ <p>Need it fast? Our express delivery ensures your surprise reaches in the shortest time possible - good surprises shouldn't wait!</p>
+ </div>
+ </div>
+ <div class="service-card reveal">
+ <div class="service-img">
+ <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=600&h=340&fit=crop&crop=center" alt="Custom Package" loading="lazy" />
+ <div class="service-img-overlay"></div>
+ </div>
+ <div class="service-body">
+ <div class="service-tag">Bespoke </div>
+ <h3>Custom Packages</h3>
+ <p>Have a unique idea? Tell us! We'll create a fully custom surprise package designed exactly to your specifications.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+ <div class="gallery-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Our Work</div>
+ <h2 class="section-title">Moments We've <span>Created</span></h2>
+ <p class="section-sub">A glimpse into the joy and magic we've delivered real surprises, real smiles, real memories.</p>
+ </div>
+ <div class="gallery-grid reveal">
+ <div class="gallery-item">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=800&h=440&fit=crop&crop=center" alt="Surprise Bundles" loading="lazy" />
+ <div class="gallery-overlay"><h4>Mega Surprise Bundles</h4><span>Gift Collections</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=440&fit=crop&crop=center" alt="Birthday Cake" loading="lazy" />
+ <div class="gallery-overlay"><h4>Birthday Cake Delivery</h4><span>Sweet Celebrations</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://images.unsplash.com/photo-1518895312237-a9e23508077d?w=400&h=220&fit=crop&crop=center" alt="Flowers" loading="lazy" />
+ <div class="gallery-overlay"><h4>Flower Arrangements</h4><span>Fresh & Beautiful</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&h=220&fit=crop&crop=top" alt="Balloon Decorations" loading="lazy" />
+ <div class="gallery-overlay"><h4>Balloon Decorations</h4><span>Party Ready</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&h=220&fit=crop&crop=center" alt="Romantic" loading="lazy" />
+ <div class="gallery-overlay"><h4>Romantic Packages</h4><span>Anniversary Love</span></div>
+ </div>
+ <div class="gallery-item">
+ <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&h=220&fit=crop&crop=center" alt="Express" loading="lazy" />
+ <div class="gallery-overlay"><h4>Express Delivery</h4><span>Lightning Fast</span></div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+ <div class="why-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Why Choose Us</div>
+ <h2 class="section-title">The <span>WebBuilders</span> Difference</h2>
+ <p class="section-sub">We don't just deliver packages - we deliver experiences you'll never forget.</p>
+ </div>
+ <div class="why-grid">
+ <div class="why-card reveal">
+ <div class="why-card-img">
+ <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&h=280&fit=crop&crop=center" alt="Fast Delivery" loading="lazy" />
+ </div>
+ <div class="why-card-body">
+ <h4> Lightning Fast Delivery</h4>
+ <p>Same-day delivery options so your surprise arrives exactly when it matters most.</p>
+ </div>
+ </div>
+ <div class="why-card reveal">
+ <div class="why-card-img">
+ <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500&h=280&fit=crop&crop=center" alt="Discreet Packaging" loading="lazy" />
+ </div>
+ <div class="why-card-body">
+ <h4> 100% Discreet</h4>
+ <p>Complete confidentiality - your surprise stays a secret until the magical reveal.</p>
+ </div>
+ </div>
+ <div class="why-card reveal">
+ <div class="why-card-img">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=500&h=280&fit=crop&crop=center" alt="Made with Love" loading="lazy" />
+ </div>
+ <div class="why-card-body">
+ <h4> Made with Love</h4>
+ <p>Every package is assembled with care, attention to detail, and genuine warmth.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+ <div class="cta-band-bg">
+ <img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=1600&h=400&fit=crop&crop=center" alt="bg" loading="lazy" />
+ </div>
+ <div class="cta-band-content">
+ <h2>Ready to Surprise Someone? </h2>
+ <p>One phone call is all it takes. Let us handle the magic while you enjoy the moment.</p>
+ <a href="tel:0741561234" class="call-btn"> Call Us: 074 156 1234</a>
+ </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+ <div class="contact-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Get In Touch</div>
+ <h2 class="section-title">Contact <span>Us</span></h2>
+ <p class="section-sub">We're just a call away! Reach us anytime to plan your perfect surprise delivery.</p>
+ </div>
+ <div class="contact-grid">
+ <div class="contact-info-cards reveal-left">
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-green"></div>
+ <div>
+ <div class="cc-label">Phone / Call Us</div>
+ <a href="tel:0741561234" class="cc-val">074 156 1234</a>
+ </div>
+ </div>
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-blue"></div>
+ <div>
+ <div class="cc-label">Email Address</div>
+ <a href="mailto:info@webbuilders.lk" class="cc-val">info@webbuilders.lk</a>
+ </div>
+ </div>
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-orange"></div>
+ <div>
+ <div class="cc-label">Our Location</div>
+ <div class="cc-val">No 953, Thadatheru Junction<br>KKS Road, Jaffna</div>
+ </div>
+ </div>
+ <div class="contact-card">
+ <div class="cc-icon-fallback cc-purple"></div>
+ <div>
+ <div class="cc-label">Working Hours</div>
+ <div class="cc-val">Mon-Sat: 8 AM - 9 PM<br>Sun: 9 AM - 6 PM</div>
+ </div>
+ </div>
+ <!-- Map embed -->
+ <div style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,143,255,0.15);margin-top:0.5rem;">
+ <iframe
+ src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3933.5!2d80.0177!3d9.6631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwMzknNDcuMiJOIDgwwrAwMScwMy43IkU!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk"
+ width="100%" height="180" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
+ </div>
+ </div>
+ <div class="contact-cta-box reveal-right">
+ <div class="contact-cta-img">
+ <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=700&h=280&fit=crop&crop=center" alt="Order Now" loading="lazy" />
+ </div>
+ <div class="contact-cta-body">
+ <h3>Order Your Surprise Now!</h3>
+ <p>Don't wait - the best surprises are just one call away. Our friendly team is ready to help you create an unforgettable moment.</p>
+ <a href="tel:0741561234" class="call-btn-big"> Call: 074 156 1234</a>
+ <a href="https://wa.me/94741561234" class="whatsapp-btn" target="_blank"> WhatsApp Us</a>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <div class="footer-logo">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=72&h=72&fit=crop&crop=center" alt="Logo" onerror="this.style.display='none'" />
+ <div class="footer-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span><span style="color:var(--muted);font-size:0.8rem">.lk</span>
+ </div>
+ </div>
+ <div class="footer-text">
+ Copyright 2026 <span>WebBuilders Surprise Delivery</span>. All rights reserved.<br>
+ <span style="color:var(--muted)">Made with love in Jaffna, Sri Lanka</span>
+ </div>
+ <div style="font-size:0.8rem;color:var(--muted)">
+ <a href="tel:0741561234" style="color:var(--blue-light)">074 156 1234</a>
+ </div>
+</footer>
+
+<script>
+// Navbar scroll
+window.addEventListener('scroll', () => {
+ document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+// Hamburger
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileMenu');
+ham.addEventListener('click', () => { ham.classList.toggle('open'); mob.classList.toggle('open'); });
+function closeMobile() { ham.classList.remove('open'); mob.classList.remove('open'); }
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+ entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach((el,i) => {
+ el.style.transitionDelay = (Math.floor(i % 4) * 0.1) + 's';
+ obs.observe(el);
+});
+</script>
+</body>
+</html>
+
+

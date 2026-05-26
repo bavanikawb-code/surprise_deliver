@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About - WebBuilders Surprise Delivery</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/94741561234" class="float-whatsapp" title="WhatsApp Us" aria-label="WhatsApp Us"></a>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+ <div class="nav-logo">
+ <img src="logo.png" alt="Logo" onerror="this.style.display='none'" />
+ <div class="nav-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span>
+ <span class="sub">Surprise Delivery</span>
+ </div>
+ </div>
+ <div class="nav-links">
+ <a href="index.html">Home</a>
+ <a href="about.html" class="active">About</a>
+ <a href="services.html">Services</a>
+ <a href="gallery.html">Gallery</a>
+ <a href="contact.html" class="nav-cta">Call Us</a>
+ </div>
+ <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+ <a href="index.html" onclick="closeMobile()"> Home</a>
+ <a href="about.html" class="active" onclick="closeMobile()"> About</a>
+ <a href="services.html" onclick="closeMobile()"> Services</a>
+ <a href="gallery.html" onclick="closeMobile()"> Gallery</a>
+ <a href="contact.html" onclick="closeMobile()">Contact</a>
+</div>
+<main class="page-main">
+<!-- ABOUT -->
+<section id="about">
+ <div class="about-wrap">
+ <div class="section-center reveal">
+ <div class="section-label">Who We Are</div>
+ <h2 class="section-title">More Than a Delivery -<br><span>It's a Surprise!</span></h2>
+ <p class="section-sub">WebBuilders Surprise Delivery was born from one simple idea: every occasion deserves something extraordinary. We handcraft surprise packages with love, speed, and magic.</p>
+ </div>
+ <div class="about-grid">
+ <div class="about-img-stack reveal-left">
+ <div class="about-main-img">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbOlEWTxkH5fFTP9Ic8he7DgyGzGdalGpiDbu5fn4kzHAAomroelpghK92z37jLf2Yp-R0lMa7lIW0c9sAmuCvLl8i1U6STHcFB4UeqaP6h-JMH6qz4DTMda5bUknRBtLxNBXwgvEE8_FHBzzp_GSflcHgTKyqOLaqLdhF1AbdpcKW57uGwCsVuWmRn0ZAJjjfDvCDx4siXmmqX-2MLl9bb5fM8Vwhk_FJuS7V6a4Z9YbxEN8_1n0CRbMrxWRhoLr3wpfv9oHuE5Ol" alt="Gift wrapping" loading="lazy" />
+ </div>
+ <div class="about-small-img">
+ <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbOlEWTxkH5fFTP9Ic8he7DgyGzGdalGpiDbu5fn4kzHAAomroelpghK92z37jLf2Yp-R0lMa7lIW0c9sAmuCvLl8i1U6STHcFB4UeqaP6h-JMH6qz4DTMda5bUknRBtLxNBXwgvEE8_FHBzzp_GSflcHgTKyqOLaqLdhF1AbdpcKW57uGwCsVuWmRn0ZAJjjfDvCDx4siXmmqX-2MLl9bb5fM8Vwhk_FJuS7V6a4Z9YbxEN8_1n0CRbMrxWRhoLr3wpfv9oHuE5Ol" alt="Surprise gift" loading="lazy" />
+ </div>
+ <div class="about-badge">
+ <span class="ab-num">5</span>
+ <span class="ab-txt">Star<br>Rated</span>
+ </div>
+ </div>
+ <div class="about-text reveal-right">
+ <div class="section-label">Our Story</div>
+ <h3 class="section-title" style="font-size:clamp(1.4rem,3vw,2rem)">Delivering Smiles <span>Across Jaffna</span></h3>
+ <p style="color:var(--muted);line-height:1.75;margin-bottom:1rem;font-size:0.95rem;">Based at Thadatheru Junction, KKS Road, Jaffna, we've been making people smile with every delivery. Our team knows that the best gifts aren't just things - they're experiences wrapped in excitement.</p>
+ <ul class="feature-list">
+ <li><div class="check">OK</div><span>Handpicked surprise items curated with care and creativity</span></li>
+ <li><div class="check">OK</div><span>Same-day & express delivery options available</span></li>
+ <li><div class="check">OK</div><span>Customizable packages for every occasion & budget</span></li>
+ <li><div class="check">OK</div><span>Trusted by 500+ happy customers across Jaffna</span></li>
+ <li><div class="check">OK</div><span>Fully discreet packaging - the surprise stays a secret!</span></li>
+ </ul>
+ <div style="margin-top:1.8rem;">
+ <a href="tel:0741561234" class="btn-primary">Order Now</a>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer>
+ <div class="footer-logo">
+ <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=72&h=72&fit=crop&crop=center" alt="Logo" onerror="this.style.display='none'" />
+ <div class="footer-logo-text">
+ <span class="blue">web</span><span class="orange">builders</span><span style="color:var(--muted);font-size:0.8rem">.lk</span>
+ </div>
+ </div>
+ <div class="footer-text">
+ Copyright 2026 <span>WebBuilders Surprise Delivery</span>. All rights reserved.<br>
+ <span style="color:var(--muted)">Made with love in Jaffna, Sri Lanka</span>
+ </div>
+ <div style="font-size:0.8rem;color:var(--muted)">
+ <a href="tel:0741561234" style="color:var(--blue-light)">074 156 1234</a>
+ </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+
+
