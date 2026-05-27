@@ -31,7 +31,7 @@
   }
   nav.scrolled { height: 60px; background: rgba(5,8,16,0.97); box-shadow: 0 4px 30px rgba(26,143,255,0.15); }
   .nav-logo { display: flex; align-items: center; gap: 10px; }
-  .nav-logo img { height: 42px; border-radius: 10px; }
+  .nav-logo img { height: 100px; border-radius: 10px; }
   .nav-logo-text { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 800; line-height: 1.1; }
   .nav-logo-text .blue { color: var(--blue-light); }
   .nav-logo-text .orange { color: var(--orange-light); }
